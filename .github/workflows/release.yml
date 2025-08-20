@@ -1,0 +1,37 @@
+name: Release Spoon
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build_release:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build .spoon zip
+        run: |
+          chmod +x ./build.sh
+          ./build.sh "${GITHUB_REF_NAME#v}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: spoon
+          path: dist/CursorContinue.spoon.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body: |
+            Hammerspoon spoon release for CursorContinue.
+          files: |
+            dist/CursorContinue.spoon.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

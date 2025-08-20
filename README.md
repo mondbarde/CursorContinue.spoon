@@ -4,6 +4,9 @@ Cursor에서 엔터 더블탭으로 지정 문구를 입력하고 Enter로 전�
 기본 문구: "진행시켜"
 지원: Cursor(Todesktop 래퍼 포함) 전면일 때만 동작(기본).
 
+## Hammerspoon 다운로드
+- Hammerspoon 1.0.0+ 권장 (macOS 12.0+): [다운로드 페이지](https://github.com/Hammerspoon/hammerspoon/releases/tag/1.0.0)
+
 ## 설치
 1) `CursorContinue.spoon.zip` 압축 해제 → `~/.hammerspoon/Spoons/`로 이동
 2) `~/.hammerspoon/init.lua`에 아래 추가:

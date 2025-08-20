@@ -28,6 +28,46 @@ cat > "$SPOON_DIR/README.json" <<EOF
 }
 EOF
 
+# Installer script inside the .spoon for double-click install
+cat > "$SPOON_DIR/install.command" <<'EOS'
+#!/usr/bin/env bash
+set -euo pipefail
+
+SPOON_NAME="CursorContinue.spoon"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+TARGET_PARENT="$HOME/.hammerspoon/Spoons"
+TARGET_DIR="$TARGET_PARENT/$SPOON_NAME"
+
+mkdir -p "$TARGET_PARENT"
+rm -rf "$TARGET_DIR"
+cp -R "$SCRIPT_DIR" "$TARGET_DIR"
+
+INIT_LUA="$HOME/.hammerspoon/init.lua"
+if [ ! -f "$INIT_LUA" ]; then
+  mkdir -p "$HOME/.hammerspoon"
+  touch "$INIT_LUA"
+fi
+
+if ! grep -q 'hs.loadSpoon("CursorContinue")' "$INIT_LUA"; then
+  cat >> "$INIT_LUA" <<'LUA'
+-- CursorContinue.spoon
+hs.loadSpoon("CursorContinue")
+spoon.CursorContinue:start()
+LUA
+fi
+
+if command -v hs >/dev/null 2>&1; then
+  hs -c 'hs.reload()' || true
+fi
+
+open -a Hammerspoon || true
+echo "Installed to $TARGET_DIR"
+echo "If Hammerspoon is running, reload config if not auto-reloaded."
+EOS
+
+chmod +x "$SPOON_DIR/install.command"
+
 ZIP_NAME="${NAME}.spoon.zip"
 (cd "$ROOT_DIR" && zip -r "dist/${ZIP_NAME}" "${NAME}.spoon" > /dev/null)
 

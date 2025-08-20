@@ -7,7 +7,14 @@ Cursor에서 엔터 더블탭으로 지정 문구를 입력하고 Enter로 전�
 ## Hammerspoon 다운로드
 - Hammerspoon 1.0.0+ 권장 (macOS 12.0+): [다운로드 페이지](https://github.com/Hammerspoon/hammerspoon/releases/tag/1.0.0)
 
-## 설치
+## 설치(권장, 더블클릭 자동 설치)
+1) 릴리스에서 `CursorContinue.spoon.zip` 다운로드 후 압축 해제
+2) 폴더 `CursorContinue.spoon/` 안의 `install.command` 더블클릭 실행
+   - 자동으로 `~/.hammerspoon/Spoons/CursorContinue.spoon`으로 복사
+   - `~/.hammerspoon/init.lua`에 `hs.loadSpoon("CursorContinue")` 및 `:start()`가 없으면 자동 추가
+   - Hammerspoon 자동 실행/리로드 시도
+
+## 수동 설치(대안)
 1) `CursorContinue.spoon.zip` 압축 해제 → `~/.hammerspoon/Spoons/`로 이동
 2) `~/.hammerspoon/init.lua`에 아래 추가:
 

@@ -22,7 +22,7 @@ cat > "$SPOON_DIR/README.json" <<EOF
   "name": "${NAME}",
   "version": "${VERSION}",
   "author": "Vincent J Lim & contributors",
-  "homepage": "https://github.com/${GITHUB_REPOSITORY:-vincentjlim/go_ahead}",
+  "homepage": "https://github.com/${GITHUB_REPOSITORY:-jacque-j-lim/CursorContinue.spoon}",
   "license": "MIT",
   "desc": "Double-Enter to send phrase in Cursor chat"
 }
